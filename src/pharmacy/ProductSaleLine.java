@@ -21,4 +21,9 @@ public class ProductSaleLine {
         return price;
     }
 
+    public BigDecimal getPatientContr(){
+        return contr.getPatientContr();
+    }
+
+
 }
