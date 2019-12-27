@@ -36,7 +36,7 @@ public class Sale {
     private void calculateAmount(){
         amount = new BigDecimal("0");
         for(int i = 0; i < l.size(); i++){
-            amount.add(l.get(i).getPrice());
+            amount.add(l.get(i).getPrice().multiply(l.get(i).getPatientContr()).divide(new BigDecimal("100")));
         }
     }
 
