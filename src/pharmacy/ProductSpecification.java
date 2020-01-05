@@ -23,4 +23,6 @@ public class ProductSpecification {
     public BigDecimal getPrice(){
         return price;
     }
+
+
 }

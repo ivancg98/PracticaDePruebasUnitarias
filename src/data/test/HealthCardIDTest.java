@@ -17,15 +17,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HealthCardIDTest implements DataExceptionsInterfaceTest {
 
     HealthCardID Hcard;
-    Date date;
+    HealthCardID Hcard1;
+    HealthCardID Hcard2;
 
+
+
+    @BeforeEach
+    void initHealthCardIDTest() throws NullObjectException, EmptyCodeException, BadlyFormedCodeException {
+        Hcard1 = new HealthCardID("casa123");
+        Hcard2 = new HealthCardID("casa123");
+    }
+
+    @Test
+    public void Equals(){
+        System.out.println(Hcard1.equals(Hcard2));
+    }
 
     @Override
     @Test
     public void NullObjectExceptionTest() {
         NullObjectException thrown = assertThrows(NullObjectException.class, () -> Hcard = new HealthCardID(null));
-        this.date = new Date();
-        System.out.println(date);
         assertTrue(thrown.getMessage().equals("objeto sin instanciar"));
     }
 
@@ -34,8 +45,8 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
     public void EmptyCodeExceptionTest() {
         EmptyCodeException thrown = assertThrows(EmptyCodeException.class, () -> Hcard = new HealthCardID(""));
         assertTrue(thrown.getMessage().equals("código de identificación vacio"));
-        }
 
+    }
 
 
     @Override
@@ -48,5 +59,7 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
     }
 
 }
+
+
 
 
