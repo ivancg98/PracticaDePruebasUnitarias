@@ -21,7 +21,7 @@ import java.util.List;
 
 public class DispensingTerminal{
 
-    NationalHealthServiceDB SNS = new NationalHealthServiceDB();
+    NationalHealthServiceDB SNS;
     HealthCardID hcID;
     Dispensing d;
     PatientContr contr;
@@ -64,6 +64,19 @@ public class DispensingTerminal{
         w.updateStock(sale.l);
         SNS.updateePrescription(hcID, d);
         }
+
+
+    public void setNationalHealthServiceDB(NationalHealthServiceDB SNS) {
+        this.SNS = SNS;
+    }
+
+    public void setWarehouse(Warehouse w) {
+        this.w = w;
+    }
+
+    public void setSalesHistory(SalesHistory salesHistory) {
+        this.salesHistory = salesHistory;
+    }
 
     }
 

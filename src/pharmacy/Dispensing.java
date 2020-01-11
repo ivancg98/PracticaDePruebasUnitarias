@@ -14,12 +14,10 @@ public class Dispensing {
     private boolean isCompleted;
     List<MedicineDispensingLine> l;
 
-    HealthCardID healthCardID;
-
-    public Dispensing(Date initDate, Date finalDate){
+    public Dispensing(Date initDate, Date finalDate, List<MedicineDispensingLine> l){
         this.initDate = initDate;
         this.finalDate = finalDate;
-
+        this.l = l;
     }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException {
@@ -27,7 +25,7 @@ public class Dispensing {
       Date actualDate = new Date(date.getYear(), date.getMonth(), date.getDay());
 
       int s1 = initDate.compareTo(actualDate);
-      int s2 = finalDate.compareTo(finalDate);
+      int s2 = finalDate.compareTo(actualDate);
 
       if(s1 == 0 || s2 == 0 || (s1>0 && s2<0)){
           return true;
