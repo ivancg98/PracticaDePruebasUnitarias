@@ -19,7 +19,7 @@ public class Dispensing {
     public Dispensing(Date initDate, Date finalDate){
         this.initDate = initDate;
         this.finalDate = finalDate;
-        isCompleted = false;
+
     }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException {
@@ -38,25 +38,24 @@ public class Dispensing {
     }
 
     public void setProductAsDispensed(ProductID prodID) {
-        boolean isCompleted = true;
         for (int i = 0; i < l.size(); i++) {
             if (prodID.equals(l.get(i).getProdID())) {
                 l.get(i).setAdquired(true);
             }
-
-            if(!l.get(i).getAdquired()){
-                isCompleted = false;
-            }
-
-        }
-
-        if(isCompleted){
-            setCompleted();
         }
     }
 
     public void setCompleted() {
-        isCompleted = true;
+        this.isCompleted = true;
+    }
+
+    public boolean isCompleted(){
+        for (int i = 0; i < l.size(); i++){
+            if(!l.get(i).isAdquired()){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setInitDate(Date initDate){

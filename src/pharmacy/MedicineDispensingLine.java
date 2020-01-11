@@ -18,7 +18,7 @@ public class MedicineDispensingLine {
         this.adquired = adquired;
     }
 
-    public boolean getAdquired(){
+    public boolean isAdquired(){
         return adquired;
     }
 
