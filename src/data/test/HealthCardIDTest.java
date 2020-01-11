@@ -5,12 +5,9 @@ import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 import data.test.testInterfaces.DataExceptionsInterfaceTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +16,6 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
     HealthCardID Hcard;
     HealthCardID Hcard1;
     HealthCardID Hcard2;
-
 
 
     @BeforeEach
@@ -48,8 +44,6 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
 
     }
 
-
-    @Override
     @Test
     public void BadlyFormedCodeExceptionTest() {
 

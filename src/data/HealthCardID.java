@@ -5,26 +5,14 @@ import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 
 public class HealthCardID {
+
     private final String personalID;
 
     public HealthCardID(String code) throws NullObjectException, BadlyFormedCodeException, EmptyCodeException {
-        if(code == null){
-            throw new NullObjectException("objeto sin instanciar");
-        }
-
-        if(code ==""){
-            throw new EmptyCodeException("código de identificación vacio");
-        }
-
+        NullObject(code);
+        EmptyCode(code);
         this.personalID = code;
-
-        for(int i=0; i < personalID.length(); i++){
-
-            if(!Character.isDigit(personalID.charAt(i)) && !Character.isLetter(personalID.charAt(i))){
-                throw new BadlyFormedCodeException("código de identificación mal formado");
-            }
-        }
-
+        BadlyFormedCode(this.personalID);
     }
 
     public String getPersonalID() {
@@ -48,5 +36,25 @@ public class HealthCardID {
     public String toString() {
         return "HealthCardID{" + "personal code='" + personalID + '\'' + '}';
 
+    }
+
+    public void BadlyFormedCode(String code) throws BadlyFormedCodeException {
+        for(int i=0; i < code.length(); i++){
+            if(!Character.isDigit(code.charAt(i)) && !Character.isLetter(code.charAt(i))){
+                throw new BadlyFormedCodeException("código de identificación mal formado");
+            }
+        }
+    }
+
+    public void NullObject(String code) throws NullObjectException {
+        if(code == null){
+            throw new NullObjectException("objeto sin instanciar");
+        }
+    }
+
+    public void EmptyCode(String code) throws EmptyCodeException {
+        if(code ==""){
+            throw new EmptyCodeException("código de identificación vacio");
+        }
     }
 }

@@ -1,10 +1,21 @@
 package data;
 
+import data.exceptions.BadlyFormedCodeException;
+import data.exceptions.EmptyCodeException;
+import data.exceptions.NullObjectException;
+
 final public class ProductID {
 
     private final String productID;
 
-    public ProductID(String code) { this.productID = code; }
+    public ProductID(String code) throws NullObjectException, EmptyCodeException, BadlyFormedCodeException {
+        NullObject(code);
+        EmptyCode(code);
+        this.productID = code;
+        BadlyFormedCode(this.productID);
+
+
+    }
 
     public String getPersonalID() { return productID; }
 
@@ -22,6 +33,26 @@ final public class ProductID {
     @Override
     public String toString() {
         return "ProductID{" + "product code='" + productID + '\'' + '}';
+    }
+
+    public void BadlyFormedCode(String code) throws BadlyFormedCodeException {
+        for(int i=0; i < code.length(); i++){
+            if(!Character.isDigit(code.charAt(i)) && !Character.isLetter(code.charAt(i))){
+                throw new BadlyFormedCodeException("código de identificación mal formado");
+            }
+        }
+    }
+
+    public void NullObject(String code) throws NullObjectException {
+        if(code == null){
+            throw new NullObjectException("objeto sin instanciar");
+        }
+    }
+
+    public void EmptyCode(String code) throws EmptyCodeException {
+        if(code ==""){
+            throw new EmptyCodeException("código de identificación vacio");
+        }
     }
 
 }
