@@ -9,9 +9,9 @@ public class MedicineDispensingLine {
     ProductID prodID;
     Boolean adquired;
 
-    public MedicineDispensingLine(ProductID prodID, Boolean adquired){
+    public MedicineDispensingLine(ProductID prodID){
         this.prodID = prodID;
-        this.adquired = adquired;
+        this.adquired = false;
     }
 
     public void setAdquired(Boolean adquired) {

@@ -16,6 +16,7 @@ import servicies.exceptions.ProductIDException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
+import java.text.ParseException;
 import java.util.Formatter;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class DispensingTerminal{
         sale = new Sale();
     }
 
-    public void enterProduct (ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException {
+    public void enterProduct (ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException, ParseException {
         ProductSpecification ps = SNS.getProductSpecific(pID);
         sale.addLine(ps.UPCode, ps.price, SNS.getPatientContr(hcID));
         if(d.dispensingEnabled()){

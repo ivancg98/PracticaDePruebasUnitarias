@@ -4,6 +4,9 @@ import data.HealthCardID;
 import data.ProductID;
 import pharmacy.exceptions.DispensingNotAvailableException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -12,22 +15,29 @@ public class Dispensing {
     private byte nOrder;
     private Date initDate, finalDate;
     private boolean isCompleted;
-    List<MedicineDispensingLine> l;
+    public List<MedicineDispensingLine> l;
 
-    public Dispensing(Date initDate, Date finalDate, List<MedicineDispensingLine> l){
-        this.initDate = initDate;
-        this.finalDate = finalDate;
+    public Dispensing(String initDate, String finalDate, List<MedicineDispensingLine> l) throws ParseException {
+        this.initDate = createDate(initDate);
+        this.finalDate = createDate(finalDate);
         this.l = l;
     }
 
-    public boolean dispensingEnabled() throws DispensingNotAvailableException {
+    public Dispensing(){
+    }
+
+    public boolean dispensingEnabled() throws DispensingNotAvailableException, ParseException {
       Date date = new Date();
-      Date actualDate = new Date(date.getYear(), date.getMonth(), date.getDay());
+      DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+      String actualdate = dateFormat.format(date);
+      date = createDate(actualdate);
 
-      int s1 = initDate.compareTo(actualDate);
-      int s2 = finalDate.compareTo(actualDate);
+      System.out.println(initDate);
+      System.out.println(finalDate);
+      int s1 = initDate.compareTo(date);
+      int s2 = finalDate.compareTo(date);
 
-      if(s1 == 0 || s2 == 0 || (s1>0 && s2<0)){
+      if(s1 == 0 || s2 == 0 || (s1<0 && s2>0)){
           return true;
       }
 
@@ -56,12 +66,26 @@ public class Dispensing {
         return true;
     }
 
-    public void setInitDate(Date initDate){
-        this.initDate = initDate;
+    public void setInitDate(String Date) throws ParseException {
+        this.initDate = createDate(Date);
     }
 
-    public void setFinalDate(Date finalDate){
-        this.finalDate = finalDate;
+    public Date getInitDate(){
+        return initDate;
+    }
+
+    public void setFinalDate(String Date) throws ParseException {
+        this.finalDate = createDate(Date);
+    }
+
+    public Date getFinalDate(){
+        return finalDate;
+    }
+
+    public Date createDate (String Date ) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date d  = sdf.parse(Date);
+        return d;
     }
 
 }
