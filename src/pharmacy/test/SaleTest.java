@@ -56,7 +56,6 @@ public class SaleTest {
         s.addLine(productID, price, contr );
         s.addLine(productID, price, contr );
         s.calculateFinalAmount();
-        System.out.println(s.getAmount());
         assertEquals(0, s.getAmount().compareTo(new BigDecimal("4.5375")));
     }
 
@@ -73,7 +72,6 @@ public class SaleTest {
 
         s.addLine(productID, price, contr );
         s.calculateFinalAmount();
-        System.out.println(s.getAmount());
         assertEquals(0, s.getAmount().compareTo(new BigDecimal("5.267735")));
     }
 
