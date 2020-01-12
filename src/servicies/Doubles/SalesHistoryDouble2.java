@@ -1,6 +1,7 @@
-package servicies;
+package servicies.Doubles;
 
 import pharmacy.Sale;
+import servicies.SalesHistoryInt;
 
 import java.net.ConnectException;
 

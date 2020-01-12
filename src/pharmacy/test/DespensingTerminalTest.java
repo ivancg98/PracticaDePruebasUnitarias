@@ -3,22 +3,19 @@ package pharmacy.test;
 import data.ProductID;
 import pharmacy.DispensingTerminal;
 import pharmacy.exceptions.DispensingNotAvailableException;
-import pharmacy.exceptions.QuantityMinorThanImport;
 import pharmacy.exceptions.SaleClosedException;
 import pharmacy.exceptions.SaleNotInitiatedException;
-import servicies.*;
 
 import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 import org.junit.jupiter.api.*;
+import servicies.Doubles.*;
 import servicies.exceptions.HealthCardException;
-import servicies.exceptions.InsuficientExistences;
 import servicies.exceptions.NotValidePrescriptionException;
 import servicies.exceptions.ProductIDException;
 
 
-import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.text.ParseException;
 
@@ -35,6 +32,8 @@ public class DespensingTerminalTest {
     SalesHistoryDouble salesHistoryDouble;
     SalesHistoryDouble2 salesHistoryDouble2;
     DispensingTerminal dTerminal;
+    CardReaderDouble cardReaderDouble;
+    CardReaderDouble2 cardReaderDouble2;
     char option;
 
     @BeforeEach
@@ -48,11 +47,23 @@ public class DespensingTerminalTest {
         warehouseDouble3 = new WarehouseDouble3();
         salesHistoryDouble = new SalesHistoryDouble();
         salesHistoryDouble2 = new SalesHistoryDouble2();
+        cardReaderDouble = new CardReaderDouble();
+        cardReaderDouble2 = new CardReaderDouble2();
+
+    }
+
+    @Test
+    void getePrescriptionHealthCardExceptionTest() {
+        dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble2);
+        HealthCardException thrown = assertThrows(HealthCardException.class, () -> dTerminal.getePrescription(option));
+        assertTrue(thrown.getMessage().equals("Lector no reconoce la tarjeta"));
     }
 
     @Test
     void getePrescriptionConnectExceptionTest() {
         dTerminal.setNationalHealthService(SNSdouble3);
+        dTerminal.setCardReader(cardReaderDouble);
         ConnectException thrown = assertThrows(ConnectException.class, () -> dTerminal.getePrescription(option));
         assertTrue(thrown.getMessage().equals("Fallo con la conexión"));
     }
@@ -60,6 +71,7 @@ public class DespensingTerminalTest {
     @Test
     void initNewSaleDispensingNotAvailableException() throws ParseException, ConnectException, BadlyFormedCodeException, NotValidePrescriptionException, EmptyCodeException, HealthCardException, NullObjectException {
         dTerminal.setNationalHealthService(SNSdouble2);
+        dTerminal.setCardReader(cardReaderDouble);
         dTerminal.getePrescription(option);
         DispensingNotAvailableException thrown = assertThrows(DispensingNotAvailableException.class, () -> dTerminal.initNewSale());
         assertTrue(thrown.getMessage().equals("Retirada fuera del periodo de dispensación"));
@@ -68,6 +80,7 @@ public class DespensingTerminalTest {
     @Test
     void enterProductConnectExceptionTest() throws ConnectException, ParseException, NotValidePrescriptionException, EmptyCodeException, NullObjectException, HealthCardException, BadlyFormedCodeException, DispensingNotAvailableException {
         dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble);
         dTerminal.getePrescription(option);
         dTerminal.initNewSale();
         dTerminal.setNationalHealthService(SNSdouble3);
@@ -78,6 +91,7 @@ public class DespensingTerminalTest {
     @Test
     void enterProductSaleNotInitiadedExceptionTest() {
         dTerminal.setNationalHealthService(SNSdouble3);
+        dTerminal.setCardReader(cardReaderDouble);
         SaleNotInitiatedException thrown = assertThrows(SaleNotInitiatedException.class, () -> dTerminal.enterProduct(new ProductID("X123")));
         assertTrue(thrown.getMessage().equals("Venta no iniciada"));
     }
@@ -86,6 +100,7 @@ public class DespensingTerminalTest {
     @Test
     void enterProductSaleClosedExceptionTest() throws ConnectException, ParseException, NotValidePrescriptionException, EmptyCodeException, NullObjectException, HealthCardException, BadlyFormedCodeException, DispensingNotAvailableException, SaleNotInitiatedException, ProductIDException, SaleClosedException {
         dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble);
         dTerminal.getePrescription(option);
         dTerminal.initNewSale();
         dTerminal.enterProduct(new ProductID("X123"));
@@ -97,6 +112,7 @@ public class DespensingTerminalTest {
     @Test
     void finalizeSaleSaleNotInitiatedExceptionTest() {
         dTerminal.setNationalHealthService(SNSdouble3);
+        dTerminal.setCardReader(cardReaderDouble);
         SaleNotInitiatedException thrown = assertThrows(SaleNotInitiatedException.class, () -> dTerminal.finalizeSale());
         assertTrue(thrown.getMessage().equals("Venta no iniciada"));
     }
@@ -104,6 +120,7 @@ public class DespensingTerminalTest {
     @Test
     void finalizeSaleSaleClosedExceptionTest() throws ConnectException, ParseException, NotValidePrescriptionException, EmptyCodeException, NullObjectException, HealthCardException, BadlyFormedCodeException, DispensingNotAvailableException, SaleNotInitiatedException, ProductIDException, SaleClosedException {
         dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble);
         dTerminal.getePrescription(option);
         dTerminal.initNewSale();
         dTerminal.enterProduct(new ProductID("X123"));

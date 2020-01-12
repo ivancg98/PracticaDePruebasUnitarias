@@ -28,10 +28,12 @@ public class DispensingTerminal{
     CashPayment p;
     SalesHistoryInt salesHistory;
     WarehouseInt w;
+    CardReaderInt cardReader;
 
 
 
     public void getePrescription( char option) throws NotValidePrescriptionException, HealthCardException, ConnectException, EmptyCodeException, ParseException, BadlyFormedCodeException, NullObjectException {
+        cardReader.getHealtCardId();
         d = SNS.getePrescription(hcID);
     }
 
@@ -79,6 +81,8 @@ public class DispensingTerminal{
     public void setSalesHistory(SalesHistoryInt salesHistory) {
         this.salesHistory = salesHistory;
     }
+
+    public void setCardReader(CardReaderInt cardReader){ this.cardReader = cardReader;}
 
     public void SaleNotInitiatedException() throws SaleNotInitiatedException {
         if(this.sale == null){

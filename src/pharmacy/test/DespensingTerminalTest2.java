@@ -11,7 +11,7 @@ import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.QuantityMinorThanImport;
 import pharmacy.exceptions.SaleClosedException;
 import pharmacy.exceptions.SaleNotInitiatedException;
-import servicies.*;
+import servicies.Doubles.*;
 import servicies.exceptions.HealthCardException;
 import servicies.exceptions.InsuficientExistences;
 import servicies.exceptions.NotValidePrescriptionException;
@@ -35,6 +35,7 @@ public class DespensingTerminalTest2 {
     SalesHistoryDouble salesHistoryDouble;
     SalesHistoryDouble2 salesHistoryDouble2;
     DispensingTerminal dTerminal;
+    CardReaderDouble cardReaderDouble;
     char option;
 
     @BeforeEach
@@ -48,7 +49,9 @@ public class DespensingTerminalTest2 {
         warehouseDouble3 = new WarehouseDouble3();
         salesHistoryDouble = new SalesHistoryDouble();
         salesHistoryDouble2 = new SalesHistoryDouble2();
+        cardReaderDouble = new CardReaderDouble();
         dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble);
         dTerminal.getePrescription(option);
         dTerminal.initNewSale();
         dTerminal.enterProduct(new ProductID("X123"));

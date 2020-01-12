@@ -1,6 +1,7 @@
-package servicies;
+package servicies.Doubles;
 
 import pharmacy.ProductSaleLine;
+import servicies.WarehouseInt;
 import servicies.exceptions.InsuficientExistences;
 
 import java.net.ConnectException;
