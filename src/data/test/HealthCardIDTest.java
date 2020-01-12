@@ -47,6 +47,22 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
 
     }
 
+    @Test
+    public void BadlyFormedCodeExceptionTest2() {
+
+        BadlyFormedCodeException thrown = assertThrows(BadlyFormedCodeException.class, () -> Hcard = new HealthCardID(".."));
+        assertTrue(thrown.getMessage().equals("código de identificación mal formado"));
+
+    }
+
+    @Test
+    public void BadlyFormedCodeExceptionTest3() {
+
+        BadlyFormedCodeException thrown = assertThrows(BadlyFormedCodeException.class, () -> Hcard = new HealthCardID(","));
+        assertTrue(thrown.getMessage().equals("código de identificación mal formado"));
+
+    }
+
 }
 
 

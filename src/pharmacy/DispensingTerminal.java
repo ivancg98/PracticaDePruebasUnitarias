@@ -29,7 +29,6 @@ public class DispensingTerminal {
     NationalHealthServiceInt SNS;
     HealthCardID hcID;
     Dispensing d;
-    PatientContr contr;
     Sale sale;
     CashPayment p;
     SalesHistoryInt salesHistory;
