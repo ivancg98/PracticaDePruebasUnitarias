@@ -6,17 +6,12 @@ import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 import org.junit.jupiter.api.*;
-import pharmacy.Dispensing;
-import pharmacy.MedicineDispensingLine;
 import pharmacy.ProductSaleLine;
 import pharmacy.Sale;
-import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.SaleClosedException;
 
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,4 +83,5 @@ public class SaleTest {
         SaleClosedException thrown = assertThrows(SaleClosedException.class, () -> s.addLine(productID, price, contr ));
         assertTrue(thrown.getMessage().equals("Venta cerrada"));
     }
+
 }

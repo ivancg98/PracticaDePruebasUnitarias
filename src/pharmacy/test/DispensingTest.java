@@ -58,7 +58,7 @@ public class DispensingTest {
     }
 
     @Test
-    public void setProductAsDispensedTest(){
+    public void setProductAsDispensedTest() {
         d.setProductAsDispensed(productID);
         assertTrue(d.l.get(0).isAdquired());
     }

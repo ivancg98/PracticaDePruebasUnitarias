@@ -2,7 +2,9 @@ package servicies;
 
 import pharmacy.Sale;
 
-public interface SalesHistoryInt {
-    public void registerSale(Sale sale);
+import java.net.ConnectException;
+
+public interface SalesHistoryInt  {
+    public void registerSale(Sale sale) throws ConnectException;
     }
 

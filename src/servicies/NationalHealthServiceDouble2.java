@@ -7,6 +7,7 @@ import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 import pharmacy.Dispensing;
+import pharmacy.MedicineDispensingLine;
 import pharmacy.ProductSpecification;
 import servicies.exceptions.HealthCardException;
 import servicies.exceptions.NotValidePrescriptionException;
@@ -14,12 +15,21 @@ import servicies.exceptions.ProductIDException;
 
 import java.net.ConnectException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class NationalHealthService implements NationalHealthServiceInt {
+
+public class NationalHealthServiceDouble2 implements NationalHealthServiceInt {
+
+
     @Override
     public Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException, NullObjectException, EmptyCodeException, BadlyFormedCodeException, ParseException {
-        return null;
+
+        ProductID productID = new ProductID("12A13W");
+        MedicineDispensingLine medicineDispensingLine = new MedicineDispensingLine(productID);
+        List<MedicineDispensingLine> listMedicineDispensingLine = new ArrayList<>();
+        listMedicineDispensingLine.add(medicineDispensingLine);
+        return new Dispensing("25-12-2019", "26-12-2019",  listMedicineDispensingLine);
     }
 
     @Override
@@ -28,8 +38,8 @@ public class NationalHealthService implements NationalHealthServiceInt {
     }
 
     @Override
-    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
-        return null;
+    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException{
+        throw null;
     }
 
     @Override

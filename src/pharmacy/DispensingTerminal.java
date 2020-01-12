@@ -3,46 +3,45 @@ package pharmacy;
 import data.HealthCardID;
 import data.PatientContr;
 import data.ProductID;
+import data.exceptions.BadlyFormedCodeException;
+import data.exceptions.EmptyCodeException;
+import data.exceptions.NullObjectException;
 import pharmacy.exceptions.DispensingNotAvailableException;
+import pharmacy.exceptions.QuantityMinorThanImport;
 import pharmacy.exceptions.SaleClosedException;
-import servicies.NationalHealthService;
-import servicies.NationalHealthServiceDB;
-import servicies.SalesHistory;
-import servicies.Warehouse;
-import servicies.exceptions.HealthCardException;
-import servicies.exceptions.InsuficientExistences;
-import servicies.exceptions.NotValidePrescriptionException;
-import servicies.exceptions.ProductIDException;
+import pharmacy.exceptions.SaleNotInitiatedException;
+import servicies.*;
+import servicies.exceptions.*;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.text.ParseException;
-import java.util.Formatter;
-import java.util.List;
+
 
 public class DispensingTerminal{
 
-    NationalHealthServiceDB SNS;
+    NationalHealthServiceInt SNS;
     HealthCardID hcID;
     Dispensing d;
     PatientContr contr;
     Sale sale;
     CashPayment p;
-    SalesHistory salesHistory;
-    Warehouse w;
+    SalesHistoryInt salesHistory;
+    WarehouseInt w;
 
 
 
-    public void getePrescription( char option) throws NotValidePrescriptionException, HealthCardException, ConnectException {
+    public void getePrescription( char option) throws NotValidePrescriptionException, HealthCardException, ConnectException, EmptyCodeException, ParseException, BadlyFormedCodeException, NullObjectException {
         d = SNS.getePrescription(hcID);
-        contr = SNS.getPatientContr(hcID);
     }
 
-    public void initNewSale(){
+    public void initNewSale() throws DispensingNotAvailableException, ParseException {
+        d.dispensingEnabled();
         sale = new Sale();
     }
 
-    public void enterProduct (ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException, ParseException {
+    public void enterProduct (ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException, ParseException, SaleNotInitiatedException,  NullObjectException, EmptyCodeException, BadlyFormedCodeException {
+        SaleNotInitiatedException();
         ProductSpecification ps = SNS.getProductSpecific(pID);
         sale.addLine(ps.UPCode, ps.price, SNS.getPatientContr(hcID));
         if(d.dispensingEnabled()){
@@ -50,34 +49,43 @@ public class DispensingTerminal{
         }
     }
 
-    public void finalizeSale() throws SaleClosedException {
+    public void finalizeSale() throws SaleClosedException, SaleNotInitiatedException {
+        SaleNotInitiatedException();
         sale.calculateFinalAmount();
         if(d.isCompleted()){
             d.setCompleted();
         }
     }
 
-    public void realizaPayment(BigDecimal quantity) throws InsuficientExistences, ConnectException {
+    public void realizaPayment(BigDecimal quantity) throws InsuficientExistences, ConnectException, QuantityMinorThanImport {
         p = new CashPayment();
         p.setImport(sale.getAmount());
-        p.setChange(quantity.subtract(p.getImport()));
+        p.setChange(p.CalculateChange(quantity));
+        System.out.println(p.getChange());
         salesHistory.registerSale(sale);
         w.updateStock(sale.l);
         SNS.updateePrescription(hcID, d);
         }
 
 
-    public void setNationalHealthServiceDB(NationalHealthServiceDB SNS) {
+    public void setNationalHealthService(NationalHealthServiceInt SNS) {
         this.SNS = SNS;
     }
 
-    public void setWarehouse(Warehouse w) {
+    public void setWarehouse(WarehouseInt w) {
         this.w = w;
     }
 
-    public void setSalesHistory(SalesHistory salesHistory) {
+    public void setSalesHistory(SalesHistoryInt salesHistory) {
         this.salesHistory = salesHistory;
     }
+
+    public void SaleNotInitiatedException() throws SaleNotInitiatedException {
+        if(this.sale == null){
+            throw new SaleNotInitiatedException("Venta no iniciada");
+        }
+    }
+
 
     }
 

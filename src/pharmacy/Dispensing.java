@@ -1,6 +1,5 @@
 package pharmacy;
 
-import data.HealthCardID;
 import data.ProductID;
 import pharmacy.exceptions.DispensingNotAvailableException;
 
@@ -27,8 +26,6 @@ public class Dispensing {
 
       Date date = createDateActual();
 
-      System.out.println(initDate);
-      System.out.println(finalDate);
       int s1 = initDate.compareTo(date);
       int s2 = finalDate.compareTo(date);
       DispensingNotAvailableException(s1, s2);
@@ -91,9 +88,7 @@ public class Dispensing {
         if(!(s1 == 0 || s2 == 0 || (s1<0 && s2>0))){
             throw new DispensingNotAvailableException("Retirada fuera del periodo de dispensación");
         }
-
-
-
     }
+
 
 }
