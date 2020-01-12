@@ -23,35 +23,27 @@ public class Dispensing {
         this.l = l;
     }
 
-    public Dispensing(){
-    }
-
     public boolean dispensingEnabled() throws DispensingNotAvailableException, ParseException {
-      Date date = new Date();
-      DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-      String actualdate = dateFormat.format(date);
-      date = createDate(actualdate);
+
+      Date date = createDateActual();
 
       System.out.println(initDate);
       System.out.println(finalDate);
       int s1 = initDate.compareTo(date);
       int s2 = finalDate.compareTo(date);
-
-      if(s1 == 0 || s2 == 0 || (s1<0 && s2>0)){
-          return true;
-      }
-
-      throw new DispensingNotAvailableException("Retirada fuera del periodo de dispensación");
+      DispensingNotAvailableException(s1, s2);
+      return true;
 
     }
 
     public void setProductAsDispensed(ProductID prodID) {
         for (int i = 0; i < l.size(); i++) {
-            if (prodID.equals(l.get(i).getProdID())) {
-                l.get(i).setAdquired(true);
+            if (prodID.equals(l.get(i).getProdID()) && !l.get(i).isAdquired()) {
+                    l.get(i).setAdquired(true);
+                    break;
+                }
             }
         }
-    }
 
     public void setCompleted() {
         this.isCompleted = true;
@@ -66,16 +58,16 @@ public class Dispensing {
         return true;
     }
 
-    public void setInitDate(String Date) throws ParseException {
-        this.initDate = createDate(Date);
+    public void setInitDate(Date date) throws ParseException {
+        this.initDate = date;
     }
 
     public Date getInitDate(){
         return initDate;
     }
 
-    public void setFinalDate(String Date) throws ParseException {
-        this.finalDate = createDate(Date);
+    public void setFinalDate(Date date) throws ParseException {
+        this.finalDate = date;
     }
 
     public Date getFinalDate(){
@@ -86,6 +78,22 @@ public class Dispensing {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date d  = sdf.parse(Date);
         return d;
+    }
+
+    public Date createDateActual() throws ParseException {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String actualdate = dateFormat.format(date);
+        return createDate(actualdate);
+    }
+
+    public void DispensingNotAvailableException(int s1, int s2) throws DispensingNotAvailableException {
+        if(!(s1 == 0 || s2 == 0 || (s1<0 && s2>0))){
+            throw new DispensingNotAvailableException("Retirada fuera del periodo de dispensación");
+        }
+
+
+
     }
 
 }

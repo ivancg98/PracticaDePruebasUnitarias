@@ -13,5 +13,4 @@ public class Payment {
         return Import;
     }
 
-
 }

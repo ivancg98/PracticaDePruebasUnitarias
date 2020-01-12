@@ -10,8 +10,8 @@ public class PatientContr {
     private final BigDecimal PatientContr;
 
     public PatientContr(BigDecimal PatientContr) throws NullObjectException, EmptyCodeException {
-        NullObject(PatientContr);
-        EmptyCode(PatientContr);
+        NullObjectException(PatientContr);
+        EmptyCodeException(PatientContr);
         this.PatientContr = PatientContr;
     }
 
@@ -35,13 +35,13 @@ public class PatientContr {
         return "PatientContr{" + "percentage patient='" + PatientContr + '\'' + '}';
     }
 
-    public void NullObject(BigDecimal PatientContr) throws NullObjectException {
+    public void NullObjectException(BigDecimal PatientContr) throws NullObjectException {
         if(PatientContr == null){
             throw new NullObjectException("objeto sin instanciar");
         }
     }
 
-    public void EmptyCode(BigDecimal PatientContr) throws EmptyCodeException {
+    public void EmptyCodeException(BigDecimal PatientContr) throws EmptyCodeException {
         if(PatientContr.compareTo(BigDecimal.ZERO) == 0){
             throw new EmptyCodeException("Porcentaje vacio");
         }

@@ -9,12 +9,10 @@ final public class ProductID {
     private final String productID;
 
     public ProductID(String code) throws NullObjectException, EmptyCodeException, BadlyFormedCodeException {
-        NullObject(code);
-        EmptyCode(code);
+        NullObjectException(code);
+        EmptyCodeException(code);
         this.productID = code;
         BadlyFormedCode(this.productID);
-
-
     }
 
     public String getPersonalID() { return productID; }
@@ -43,13 +41,13 @@ final public class ProductID {
         }
     }
 
-    public void NullObject(String code) throws NullObjectException {
+    public void NullObjectException(String code) throws NullObjectException {
         if(code == null){
             throw new NullObjectException("objeto sin instanciar");
         }
     }
 
-    public void EmptyCode(String code) throws EmptyCodeException {
+    public void EmptyCodeException(String code) throws EmptyCodeException {
         if(code ==""){
             throw new EmptyCodeException("código de identificación vacio");
         }
