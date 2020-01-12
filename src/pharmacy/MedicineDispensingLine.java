@@ -9,7 +9,7 @@ public class MedicineDispensingLine {
     ProductID prodID;
     Boolean adquired;
 
-    public MedicineDispensingLine(ProductID prodID){
+    public MedicineDispensingLine(ProductID prodID) {
         this.prodID = prodID;
         this.adquired = false;
     }
@@ -18,11 +18,11 @@ public class MedicineDispensingLine {
         this.adquired = adquired;
     }
 
-    public boolean isAdquired(){
+    public boolean isAdquired() {
         return adquired;
     }
 
-    public ProductID getProdID(){
+    public ProductID getProdID() {
         return prodID;
     }
 }

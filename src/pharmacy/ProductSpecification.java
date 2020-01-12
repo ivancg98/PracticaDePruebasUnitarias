@@ -10,17 +10,17 @@ public class ProductSpecification {
     String description;
     BigDecimal price;
 
-    public ProductSpecification(ProductID UPCode, String description, BigDecimal price){
+    public ProductSpecification(ProductID UPCode, String description, BigDecimal price) {
         this.UPCode = UPCode;
         this.description = description;
         this.price = price;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public BigDecimal getPrice(){
+    public BigDecimal getPrice() {
         return price;
     }
 

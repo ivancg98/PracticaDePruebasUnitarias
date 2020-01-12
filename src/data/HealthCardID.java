@@ -39,21 +39,21 @@ public class HealthCardID {
     }
 
     public void BadlyFormedCodeException(String code) throws BadlyFormedCodeException {
-        for(int i=0; i < code.length(); i++){
-            if(!Character.isDigit(code.charAt(i)) && !Character.isLetter(code.charAt(i))){
+        for (int i = 0; i < code.length(); i++) {
+            if (!Character.isDigit(code.charAt(i)) && !Character.isLetter(code.charAt(i))) {
                 throw new BadlyFormedCodeException("código de identificación mal formado");
             }
         }
     }
 
     public void NullObjectException(String code) throws NullObjectException {
-        if(code == null){
+        if (code == null) {
             throw new NullObjectException("objeto sin instanciar");
         }
     }
 
     public void EmptyCodeException(String code) throws EmptyCodeException {
-        if(code ==""){
+        if (code == "") {
             throw new EmptyCodeException("código de identificación vacio");
         }
     }

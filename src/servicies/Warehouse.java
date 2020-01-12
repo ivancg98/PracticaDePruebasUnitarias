@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Warehouse implements WarehouseInt {
 
-   @Override
-   public void updateStock(List<ProductSaleLine> listOfProducts) throws InsuficientExistences {
+    @Override
+    public void updateStock(List<ProductSaleLine> listOfProducts) throws InsuficientExistences {
 
-   }
+    }
 }

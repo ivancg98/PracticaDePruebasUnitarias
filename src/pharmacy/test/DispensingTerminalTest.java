@@ -4,7 +4,6 @@ import data.ProductID;
 import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.Dispensing;
@@ -13,8 +12,8 @@ import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.SaleClosedException;
 import pharmacy.exceptions.SaleNotInitiatedException;
-import servicies.Doubles.*;
-import servicies.SalesHistory;
+import servicies.Doubles.CardReaderDouble;
+import servicies.Doubles.NationalHealthServiceDouble5;
 import servicies.exceptions.HealthCardException;
 import servicies.exceptions.NotValidePrescriptionException;
 import servicies.exceptions.ProductIDException;
@@ -23,7 +22,8 @@ import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DispensingTerminalTest {
 
@@ -53,9 +53,9 @@ public class DispensingTerminalTest {
     public void finalizeSaleGetAmountTest() throws SaleClosedException, SaleNotInitiatedException {
         dTerminal.finalizeSale();
         s = dTerminal.getSale();
-        assertEquals(0,s.getAmount().compareTo(new BigDecimal("30.0536775")));
+        assertEquals(0, s.getAmount().compareTo(new BigDecimal("30.0536775")));
 
-        }
+    }
 
     @Test
     public void finalizeSaleisCompletedTest() throws SaleClosedException, SaleNotInitiatedException {
@@ -72,7 +72,7 @@ public class DispensingTerminalTest {
         dTerminal.enterProduct(new ProductID("122A12343W"));
         dTerminal.finalizeSale();
         s = dTerminal.getSale();
-        assertEquals(0,s.getAmount().compareTo(new BigDecimal("70.1252475")));
+        assertEquals(0, s.getAmount().compareTo(new BigDecimal("70.1252475")));
 
     }
 
@@ -98,7 +98,7 @@ public class DispensingTerminalTest {
         assertTrue(d.isCompleted());
     }
 
-    }
+}
 
 
 

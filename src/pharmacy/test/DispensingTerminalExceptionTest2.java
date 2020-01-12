@@ -68,7 +68,7 @@ public class DispensingTerminalExceptionTest2 {
     }
 
     @Test
-    void realizePaymentConnectException2Test(){
+    void realizePaymentConnectException2Test() {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.setWarehouse(warehouseDouble2);
         ConnectException thrown = assertThrows(ConnectException.class, () -> dTerminal.realizaPayment(new BigDecimal("50")));
@@ -87,7 +87,7 @@ public class DispensingTerminalExceptionTest2 {
     }
 
     @Test
-    void realizePaymentQuantityMinorThanImportTest(){
+    void realizePaymentQuantityMinorThanImportTest() {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.setWarehouse(warehouseDouble);
         QuantityMinorThanImport thrown = assertThrows(QuantityMinorThanImport.class, () -> dTerminal.realizaPayment(new BigDecimal("5")));
@@ -96,7 +96,7 @@ public class DispensingTerminalExceptionTest2 {
     }
 
     @Test
-    void realizePaymentInsuficientExistencesTest(){
+    void realizePaymentInsuficientExistencesTest() {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.setWarehouse(warehouseDouble3);
         InsuficientExistences thrown = assertThrows(InsuficientExistences.class, () -> dTerminal.realizaPayment(new BigDecimal("50")));

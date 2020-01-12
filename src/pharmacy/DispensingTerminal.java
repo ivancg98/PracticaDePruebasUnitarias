@@ -10,15 +10,21 @@ import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.QuantityMinorThanImport;
 import pharmacy.exceptions.SaleClosedException;
 import pharmacy.exceptions.SaleNotInitiatedException;
-import servicies.*;
-import servicies.exceptions.*;
+import servicies.CardReaderInt;
+import servicies.NationalHealthServiceInt;
+import servicies.SalesHistoryInt;
+import servicies.WarehouseInt;
+import servicies.exceptions.HealthCardException;
+import servicies.exceptions.InsuficientExistences;
+import servicies.exceptions.NotValidePrescriptionException;
+import servicies.exceptions.ProductIDException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.text.ParseException;
 
 
-public class DispensingTerminal{
+public class DispensingTerminal {
 
     NationalHealthServiceInt SNS;
     HealthCardID hcID;
@@ -31,8 +37,7 @@ public class DispensingTerminal{
     CardReaderInt cardReader;
 
 
-
-    public void getePrescription( char option) throws NotValidePrescriptionException, HealthCardException, ConnectException, EmptyCodeException, ParseException, BadlyFormedCodeException, NullObjectException {
+    public void getePrescription(char option) throws NotValidePrescriptionException, HealthCardException, ConnectException, EmptyCodeException, ParseException, BadlyFormedCodeException, NullObjectException {
         cardReader.getHealtCardId();
         d = SNS.getePrescription(hcID);
     }
@@ -42,11 +47,11 @@ public class DispensingTerminal{
         sale = new Sale();
     }
 
-    public void enterProduct (ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException, ParseException, SaleNotInitiatedException,  NullObjectException, EmptyCodeException, BadlyFormedCodeException {
+    public void enterProduct(ProductID pID) throws ProductIDException, ConnectException, SaleClosedException, DispensingNotAvailableException, ParseException, SaleNotInitiatedException, NullObjectException, EmptyCodeException, BadlyFormedCodeException {
         SaleNotInitiatedException();
         ProductSpecification ps = SNS.getProductSpecific(pID);
         sale.addLine(ps.UPCode, ps.price, SNS.getPatientContr(hcID));
-        if(d.dispensingEnabled()){
+        if (d.dispensingEnabled()) {
             d.setProductAsDispensed(pID);
         }
     }
@@ -54,7 +59,7 @@ public class DispensingTerminal{
     public void finalizeSale() throws SaleClosedException, SaleNotInitiatedException {
         SaleNotInitiatedException();
         sale.calculateFinalAmount();
-        if(d.isCompleted()){
+        if (d.isCompleted()) {
             d.setCompleted();
         }
     }
@@ -66,7 +71,7 @@ public class DispensingTerminal{
         salesHistory.registerSale(sale);
         w.updateStock(sale.l);
         SNS.updateePrescription(hcID, d);
-        }
+    }
 
 
     public void setNationalHealthService(NationalHealthServiceInt SNS) {
@@ -81,27 +86,29 @@ public class DispensingTerminal{
         this.salesHistory = salesHistory;
     }
 
-    public void setCardReader(CardReaderInt cardReader){ this.cardReader = cardReader;}
+    public void setCardReader(CardReaderInt cardReader) {
+        this.cardReader = cardReader;
+    }
 
     public void SaleNotInitiatedException() throws SaleNotInitiatedException {
-        if(this.sale == null){
+        if (this.sale == null) {
             throw new SaleNotInitiatedException("Venta no iniciada");
         }
     }
 
-    public Sale getSale(){
+    public Sale getSale() {
         return sale;
     }
 
-    public Dispensing getDispensing(){
+    public Dispensing getDispensing() {
         return d;
     }
 
-    public CashPayment getCashPayment(){
+    public CashPayment getCashPayment() {
         return p;
     }
 
-    }
+}
 
 
 

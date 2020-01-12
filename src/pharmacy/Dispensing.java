@@ -23,31 +23,31 @@ public class Dispensing {
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException, ParseException {
 
-      Date date = createDateActual();
+        Date date = createDateActual();
 
-      int s1 = initDate.compareTo(date);
-      int s2 = finalDate.compareTo(date);
-      DispensingNotAvailableException(s1, s2);
-      return true;
+        int s1 = initDate.compareTo(date);
+        int s2 = finalDate.compareTo(date);
+        DispensingNotAvailableException(s1, s2);
+        return true;
 
     }
 
     public void setProductAsDispensed(ProductID prodID) {
         for (int i = 0; i < l.size(); i++) {
             if (prodID.equals(l.get(i).getProdID()) && !l.get(i).isAdquired()) {
-                    l.get(i).setAdquired(true);
-                    break;
-                }
+                l.get(i).setAdquired(true);
+                break;
             }
         }
+    }
 
     public void setCompleted() {
         this.isCompleted = true;
     }
 
-    public boolean isCompleted(){
-        for (int i = 0; i < l.size(); i++){
-            if(!l.get(i).isAdquired()){
+    public boolean isCompleted() {
+        for (int i = 0; i < l.size(); i++) {
+            if (!l.get(i).isAdquired()) {
                 return false;
             }
         }
@@ -58,7 +58,7 @@ public class Dispensing {
         this.initDate = date;
     }
 
-    public Date getInitDate(){
+    public Date getInitDate() {
         return initDate;
     }
 
@@ -66,13 +66,13 @@ public class Dispensing {
         this.finalDate = date;
     }
 
-    public Date getFinalDate(){
+    public Date getFinalDate() {
         return finalDate;
     }
 
-    public Date createDate (String Date ) throws ParseException {
+    public Date createDate(String Date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Date d  = sdf.parse(Date);
+        Date d = sdf.parse(Date);
         return d;
     }
 
@@ -84,7 +84,7 @@ public class Dispensing {
     }
 
     public void DispensingNotAvailableException(int s1, int s2) throws DispensingNotAvailableException {
-        if(!(s1 == 0 || s2 == 0 || (s1<0 && s2>0))){
+        if (!(s1 == 0 || s2 == 0 || (s1 < 0 && s2 > 0))) {
             throw new DispensingNotAvailableException("Retirada fuera del periodo de dispensación");
         }
     }

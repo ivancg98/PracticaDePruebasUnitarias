@@ -4,11 +4,11 @@ import data.ProductID;
 import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pharmacy.Dispensing;
 import pharmacy.MedicineDispensingLine;
 import pharmacy.exceptions.DispensingNotAvailableException;
-
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class DispensingTest {
 
 
     @BeforeEach
-    void initDispensingTest () throws ParseException, NullObjectException, EmptyCodeException, BadlyFormedCodeException {
+    void initDispensingTest() throws ParseException, NullObjectException, EmptyCodeException, BadlyFormedCodeException {
         productID = new ProductID("12A13W");
         productID2 = new ProductID("122A13W");
         medicineDispensingLine = new MedicineDispensingLine(productID);
@@ -40,8 +40,8 @@ public class DispensingTest {
         listMedicineDispensingLine.add(medicineDispensingLine);
         listMedicineDispensingLine.add(medicineDispensingLine2);
         listMedicineDispensingLine.add(medicineDispensingLine3);
-        d = new Dispensing("25-12-2019", "12-01-2020",  listMedicineDispensingLine);
-        d2 = new Dispensing("25-12-2019", "09-01-2020",  listMedicineDispensingLine);
+        d = new Dispensing("25-12-2019", "12-01-2020", listMedicineDispensingLine);
+        d2 = new Dispensing("25-12-2019", "09-01-2020", listMedicineDispensingLine);
 
     }
 
@@ -52,7 +52,7 @@ public class DispensingTest {
     }
 
     @Test
-    public void dispensingEnabledDispensingNotAvailableExceptionTest(){
+    public void dispensingEnabledDispensingNotAvailableExceptionTest() {
         DispensingNotAvailableException thrown = assertThrows(DispensingNotAvailableException.class, () -> d2.dispensingEnabled());
         assertTrue(thrown.getMessage().equals("Retirada fuera del periodo de dispensación"));
     }
@@ -64,19 +64,19 @@ public class DispensingTest {
     }
 
     @Test
-    public void isCompletedTest(){
+    public void isCompletedTest() {
         assertTrue(!d.isCompleted());
     }
 
     @Test
-    public void isCompletedTest2(){
+    public void isCompletedTest2() {
         d.setProductAsDispensed(productID);
         assertTrue(!d.isCompleted());
     }
 
 
     @Test
-    public void isCompletedTest3(){
+    public void isCompletedTest3() {
         d.setProductAsDispensed(productID);
         d.setProductAsDispensed(productID);
         d.setProductAsDispensed(productID);
@@ -86,7 +86,7 @@ public class DispensingTest {
     @Test
     public void setInitDateTest() throws ParseException {
         d.setInitDate(d.createDate("22-11-2011"));
-        assertEquals(0, d.getInitDate().compareTo(d.createDate("22-11-2011")) );
+        assertEquals(0, d.getInitDate().compareTo(d.createDate("22-11-2011")));
     }
 
     @Test

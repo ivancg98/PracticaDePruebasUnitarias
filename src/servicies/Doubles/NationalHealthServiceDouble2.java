@@ -30,7 +30,7 @@ public class NationalHealthServiceDouble2 implements NationalHealthServiceInt {
         MedicineDispensingLine medicineDispensingLine = new MedicineDispensingLine(productID);
         List<MedicineDispensingLine> listMedicineDispensingLine = new ArrayList<>();
         listMedicineDispensingLine.add(medicineDispensingLine);
-        return new Dispensing("25-12-2019", "26-12-2019",  listMedicineDispensingLine);
+        return new Dispensing("25-12-2019", "26-12-2019", listMedicineDispensingLine);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class NationalHealthServiceDouble2 implements NationalHealthServiceInt {
     }
 
     @Override
-    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException{
+    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
         throw null;
     }
 

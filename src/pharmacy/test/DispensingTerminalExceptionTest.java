@@ -1,25 +1,25 @@
 package pharmacy.test;
 
 import data.ProductID;
+import data.exceptions.BadlyFormedCodeException;
+import data.exceptions.EmptyCodeException;
+import data.exceptions.NullObjectException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pharmacy.DispensingTerminal;
 import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.SaleClosedException;
 import pharmacy.exceptions.SaleNotInitiatedException;
-
-import data.exceptions.BadlyFormedCodeException;
-import data.exceptions.EmptyCodeException;
-import data.exceptions.NullObjectException;
-import org.junit.jupiter.api.*;
 import servicies.Doubles.*;
 import servicies.exceptions.HealthCardException;
 import servicies.exceptions.NotValidePrescriptionException;
 import servicies.exceptions.ProductIDException;
 
-
 import java.net.ConnectException;
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DispensingTerminalExceptionTest {
 
@@ -108,7 +108,6 @@ public class DispensingTerminalExceptionTest {
         ProductIDException thrown = assertThrows(ProductIDException.class, () -> dTerminal.enterProduct(new ProductID("X123")));
         assertTrue(thrown.getMessage().equals("El identificador del producto no se encuentra en el catalogo"));
     }
-
 
 
     @Test

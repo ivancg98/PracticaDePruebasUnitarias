@@ -11,6 +11,6 @@ public class CardReaderDouble implements CardReaderInt {
     @Override
     public HealthCardID getHealtCardId() throws HealthCardException, NullObjectException, EmptyCodeException, BadlyFormedCodeException {
 
-         return new HealthCardID("789U") ;
+        return new HealthCardID("789U");
     }
 }

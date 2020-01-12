@@ -27,7 +27,6 @@ public class NationalHealthServiceDouble implements NationalHealthServiceInt {
     ProductID productID2;
 
 
-
     @Override
     public Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException, NullObjectException, EmptyCodeException, BadlyFormedCodeException, ParseException {
 
@@ -43,7 +42,7 @@ public class NationalHealthServiceDouble implements NationalHealthServiceInt {
         listMedicineDispensingLine.add(medicineDispensingLine);
         listMedicineDispensingLine.add(medicineDispensingLine2);
         listMedicineDispensingLine.add(medicineDispensingLine3);
-        return new Dispensing("25-12-2019", "24-02-2020",  listMedicineDispensingLine);
+        return new Dispensing("25-12-2019", "24-02-2020", listMedicineDispensingLine);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class NationalHealthServiceDouble implements NationalHealthServiceInt {
     }
 
     @Override
-    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException{
+    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
         return new ProductSpecification(productID, "a", new BigDecimal("10.50"));
     }
 

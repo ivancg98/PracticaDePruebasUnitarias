@@ -5,11 +5,11 @@ import data.exceptions.BadlyFormedCodeException;
 import data.exceptions.EmptyCodeException;
 import data.exceptions.NullObjectException;
 import data.test.testInterfaces.DataExceptionsInterfaceTest;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HealthCardIDTest implements DataExceptionsInterfaceTest {
 
@@ -22,11 +22,6 @@ public class HealthCardIDTest implements DataExceptionsInterfaceTest {
     void initHealthCardIDTest() throws NullObjectException, EmptyCodeException, BadlyFormedCodeException {
         Hcard1 = new HealthCardID("casa123");
         Hcard2 = new HealthCardID("casa123");
-    }
-
-    @Test
-    public void Equals(){
-        System.out.println(Hcard1.equals(Hcard2));
     }
 
     @Override

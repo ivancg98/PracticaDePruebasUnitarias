@@ -18,7 +18,7 @@ public class Sale {
     List<ProductSaleLine> l;
 
 
-    public Sale (){
+    public Sale() {
         this.saleCode = 1;
         this.date = new Date();
         l = new ArrayList<>();
@@ -26,15 +26,15 @@ public class Sale {
         this.amount = new BigDecimal("0");
     }
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException{
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         isClosedException();
         ProductSaleLine p = new ProductSaleLine(prodID, price, contr);
         l.add(p);
     }
 
-    private void calculateAmount(){
+    private void calculateAmount() {
 
-        for(int i = 0; i < l.size(); i++){
+        for (int i = 0; i < l.size(); i++) {
             amount = amount.add(l.get(i).getPrice().multiply(l.get(i).getPatientContr()).divide(new BigDecimal("100")));
         }
     }
@@ -44,7 +44,7 @@ public class Sale {
         amount = amount.multiply(new BigDecimal("21")).divide(new BigDecimal("100")).add(amount);
     }
 
-    public void calculateFinalAmount() throws SaleClosedException{
+    public void calculateFinalAmount() throws SaleClosedException {
 
         isClosedException();
         calculateAmount();
@@ -57,16 +57,16 @@ public class Sale {
         return amount;
     }
 
-    private void setClosed(){
+    private void setClosed() {
         isClosed = true;
     }
 
-    public boolean isClosed(){
+    public boolean isClosed() {
         return isClosed;
     }
 
     public void isClosedException() throws SaleClosedException {
-        if(isClosed()){
+        if (isClosed()) {
             throw new SaleClosedException("Venta cerrada");
         }
     }

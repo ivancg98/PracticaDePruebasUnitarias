@@ -7,9 +7,7 @@ import data.exceptions.NullObjectException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.CashPayment;
-import pharmacy.Dispensing;
 import pharmacy.DispensingTerminal;
-import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.QuantityMinorThanImport;
 import pharmacy.exceptions.SaleClosedException;
@@ -18,7 +16,6 @@ import servicies.Doubles.CardReaderDouble;
 import servicies.Doubles.NationalHealthServiceDouble5;
 import servicies.Doubles.SalesHistoryDouble;
 import servicies.Doubles.WarehouseDouble;
-import servicies.Warehouse;
 import servicies.exceptions.HealthCardException;
 import servicies.exceptions.InsuficientExistences;
 import servicies.exceptions.NotValidePrescriptionException;
@@ -29,7 +26,6 @@ import java.net.ConnectException;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DispensingTerminalTest2 {
 
@@ -67,9 +63,9 @@ public class DispensingTerminalTest2 {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.realizaPayment(new BigDecimal("50.45"));
         c = dTerminal.getCashPayment();
-        assertEquals(0,c.getChange().compareTo(new BigDecimal("20.3963225")));
+        assertEquals(0, c.getChange().compareTo(new BigDecimal("20.3963225")));
 
-        }
+    }
 
     @Test
     public void finalize2() throws SaleClosedException, SaleNotInitiatedException, ConnectException, QuantityMinorThanImport, InsuficientExistences {
@@ -78,7 +74,7 @@ public class DispensingTerminalTest2 {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.realizaPayment(new BigDecimal("34.45"));
         c = dTerminal.getCashPayment();
-        assertEquals(0,c.getChange().compareTo(new BigDecimal("4.3963225")));
+        assertEquals(0, c.getChange().compareTo(new BigDecimal("4.3963225")));
 
     }
 
@@ -89,13 +85,12 @@ public class DispensingTerminalTest2 {
         dTerminal.setSalesHistory(salesHistoryDouble);
         dTerminal.realizaPayment(new BigDecimal("30.0536775"));
         c = dTerminal.getCashPayment();
-        assertEquals(0,c.getChange().compareTo(new BigDecimal("0")));
+        assertEquals(0, c.getChange().compareTo(new BigDecimal("0")));
 
     }
 
 
-
-    }
+}
 
 
 

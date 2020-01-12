@@ -15,11 +15,11 @@ public class PatientContr {
         this.PatientContr = PatientContr;
     }
 
-    public BigDecimal getPatientContr(){
+    public BigDecimal getPatientContr() {
         return PatientContr;
     }
 
-     @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -28,7 +28,9 @@ public class PatientContr {
     }
 
     @Override
-    public int hashCode() { return PatientContr.hashCode(); }
+    public int hashCode() {
+        return PatientContr.hashCode();
+    }
 
     @Override
     public String toString() {
@@ -36,13 +38,13 @@ public class PatientContr {
     }
 
     public void NullObjectException(BigDecimal PatientContr) throws NullObjectException {
-        if(PatientContr == null){
+        if (PatientContr == null) {
             throw new NullObjectException("objeto sin instanciar");
         }
     }
 
     public void EmptyCodeException(BigDecimal PatientContr) throws EmptyCodeException {
-        if(PatientContr.compareTo(BigDecimal.ZERO) == 0){
+        if (PatientContr.compareTo(BigDecimal.ZERO) == 0) {
             throw new EmptyCodeException("Porcentaje vacio");
         }
     }
