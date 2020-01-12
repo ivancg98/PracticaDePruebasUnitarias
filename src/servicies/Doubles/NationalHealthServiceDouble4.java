@@ -33,7 +33,7 @@ public class NationalHealthServiceDouble4 implements NationalHealthServiceInt {
 
     @Override
     public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
-        return null;
+        throw new ProductIDException("El identificador del producto no se encuentra en el catalogo");
     }
 
     @Override

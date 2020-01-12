@@ -21,7 +21,7 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DespensingTerminalTest {
+public class DispensingTerminalExceptionTest {
 
     NationalHealthServiceDouble SNSdouble;
     NationalHealthServiceDouble2 SNSdouble2;
@@ -61,6 +61,15 @@ public class DespensingTerminalTest {
     }
 
     @Test
+    void getePrescriptionNotValidePrescriptionExceptionTest() {
+        NationalHealthServiceDouble4 SNSdouble4 = new NationalHealthServiceDouble4();
+        dTerminal.setNationalHealthService(SNSdouble4);
+        dTerminal.setCardReader(cardReaderDouble);
+        NotValidePrescriptionException thrown = assertThrows(NotValidePrescriptionException.class, () -> dTerminal.getePrescription(option));
+        assertTrue(thrown.getMessage().equals("El paciente no tiene ninguna receta asociada"));
+    }
+
+    @Test
     void getePrescriptionConnectExceptionTest() {
         dTerminal.setNationalHealthService(SNSdouble3);
         dTerminal.setCardReader(cardReaderDouble);
@@ -87,6 +96,20 @@ public class DespensingTerminalTest {
         ConnectException thrown = assertThrows(ConnectException.class, () -> dTerminal.enterProduct(new ProductID("X123")));
         assertTrue(thrown.getMessage().equals("Fallo con la conexión"));
     }
+
+    @Test
+    void enterProductProductIDExceptionTest() throws ConnectException, ParseException, NotValidePrescriptionException, EmptyCodeException, NullObjectException, HealthCardException, BadlyFormedCodeException, DispensingNotAvailableException {
+        NationalHealthServiceDouble4 SNSdouble4 = new NationalHealthServiceDouble4();
+        dTerminal.setNationalHealthService(SNSdouble);
+        dTerminal.setCardReader(cardReaderDouble);
+        dTerminal.getePrescription(option);
+        dTerminal.initNewSale();
+        dTerminal.setNationalHealthService(SNSdouble4);
+        ProductIDException thrown = assertThrows(ProductIDException.class, () -> dTerminal.enterProduct(new ProductID("X123")));
+        assertTrue(thrown.getMessage().equals("El identificador del producto no se encuentra en el catalogo"));
+    }
+
+
 
     @Test
     void enterProductSaleNotInitiadedExceptionTest() {

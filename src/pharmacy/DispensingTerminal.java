@@ -63,7 +63,6 @@ public class DispensingTerminal{
         p = new CashPayment();
         p.setImport(sale.getAmount());
         p.setChange(p.CalculateChange(quantity));
-        System.out.println(p.getChange());
         salesHistory.registerSale(sale);
         w.updateStock(sale.l);
         SNS.updateePrescription(hcID, d);
@@ -90,6 +89,17 @@ public class DispensingTerminal{
         }
     }
 
+    public Sale getSale(){
+        return sale;
+    }
+
+    public Dispensing getDispensing(){
+        return d;
+    }
+
+    public CashPayment getCashPayment(){
+        return p;
+    }
 
     }
 

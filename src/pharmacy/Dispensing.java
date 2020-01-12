@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Dispensing {
 
-    private byte nOrder;
     private Date initDate, finalDate;
     private boolean isCompleted;
     public List<MedicineDispensingLine> l;

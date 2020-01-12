@@ -24,7 +24,7 @@ import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DespensingTerminalTest2 {
+public class DispensingTerminalExceptionTest2 {
 
     NationalHealthServiceDouble SNSdouble;
     NationalHealthServiceDouble2 SNSdouble2;
